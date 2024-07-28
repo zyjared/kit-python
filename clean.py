@@ -8,8 +8,9 @@ if __name__ == '__main__':
         r'.*tempCodeRunnerFile\.py',
         r'.*__pycache__',
         r'.*egg-info',
-        r'.*build'
-        ]
+        r'.*build',
+        r'.*dist',
+    ]
     ignore = [r'\.git', r'env',]
 
     removed = clean_directory(dirpath, include, ignore)

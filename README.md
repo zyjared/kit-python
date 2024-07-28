@@ -1,6 +1,7 @@
 # kit-python
 
 - [python](https://www.python.org/)
+- [pypi](https://pypi.org/)
 
 ## packages
 
@@ -11,20 +12,14 @@
 
 ## install `pkgs`
 
-[setuptools](https://github.com/pypa/setuptools) is required.
-
-```sh
-pip install setuptools
-```
-
 ### zyjared-color
 
 ```sh
-pip install "git+https://github.com/zyjared/kit-python.git#egg=zyjared-color&subdirectory=pkgs/color"
+pip install zyjared-color
 ```
 
 ### zyjared-fs
 
 ```sh
-pip install "git+https://github.com/zyjared/kit-python.git#egg=zyjared-fs&subdirectory=pkgs/fs"
+pip install zyjared-fs
 ```

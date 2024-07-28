@@ -3,7 +3,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='zyjared-color',
-    version='0.1',
+    version='0.1.2',
     packages=find_namespace_packages(include=['zyjared.*']),
     install_requires=[],
     author='Jared Zhang',
