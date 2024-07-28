@@ -3,8 +3,8 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='zyjared-color',
-    version='0.1.2',
-    packages=find_namespace_packages(include=['zyjared.*']),
+    version='0.1.4',
+    packages=find_namespace_packages(include=['zyjared_color', 'zyjared_color.*']),
     install_requires=[],
     author='Jared Zhang',
     author_email='zyjared@outlook.com',
@@ -13,7 +13,7 @@ setup(
     long_description_content_type='text/markdown',
     url='https://github.com/zyjared/kit-python',
     classifiers=[
-        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],

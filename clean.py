@@ -1,6 +1,6 @@
 from pathlib import Path
-from zyjared.fs import clean_directory
-from zyjared.color import Color
+from zyjared_fs import clean_directory
+from zyjared_color import Color
 
 if __name__ == '__main__':
     dirpath = Path(__file__).parent

@@ -1,13 +1,15 @@
-# fs
+# zyjared-fs
 
-## Usage
+## Installation
 
 ```sh
 pip install zyjared-fs
 ```
 
+## Usage
+
 ```python
-from fs import matches_path, rm_path, clean_directory
+from zyjared_fs import matches_path, rm_path, clean_directory
 from pathlib import Path
 
 rm_path(Path('test'))
