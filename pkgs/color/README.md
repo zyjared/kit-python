@@ -6,6 +6,11 @@
 
 ## Usage
 
+```sh
+pip install setuptools
+pip install "git+https://github.com/zyjared/kit-python.git#egg=zyjared-color&subdirectory=pkgs/color"
+```
+
 ```python
 Color('Hello World!').red()
 

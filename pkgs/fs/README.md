@@ -2,6 +2,11 @@
 
 ## Usage
 
+```sh
+pip install setuptools
+pip install "git+https://github.com/zyjared/kit-python.git#egg=zyjared-fs&subdirectory=pkgs/fs"
+```
+
 ```python
 from fs import matches_path, rm_path, clean_directory
 from pathlib import Path
