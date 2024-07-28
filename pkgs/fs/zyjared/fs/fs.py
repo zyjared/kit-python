@@ -31,12 +31,19 @@ def rm_path(path: Path):
     """
     删除文件或目录
     """
-    if path.is_dir():
-        for child in path.iterdir():
-            rm_path(child)
-        path.rmdir()
-    else:
-        path.unlink()
+    try:
+        if path.is_dir():
+            for child in path.iterdir():
+                rm_path(child)
+            path.rmdir()
+        else:
+            path.unlink()
+    except PermissionError:
+        print(f'[rm_path] Permission denied: {path}')
+    except FileNotFoundError:
+        print(f'[rm_path] File not found: {path}')
+    except Exception as e:
+        print(f'[rm_path] Error {path}: {e}')
 
 
 def clean_directory_recursive(dirpath: Path, include: list[Pattern], ignore: list[Pattern] = None, removed: list[Path] = [], root: Path = None):
@@ -59,7 +66,7 @@ def clean_directory_recursive(dirpath: Path, include: list[Pattern], ignore: lis
             removed.append(relpath)
 
         if path.is_dir():
-            clean_directory_recursive(path, include, ignore, removed)
+            clean_directory_recursive(path, include, ignore, removed, root)
 
     return removed
 

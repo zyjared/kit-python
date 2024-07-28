@@ -130,7 +130,7 @@ class Color(Text):
         super().__init__(value)
 
 
-if __name__ == '__main__':
+def main():
     types = ['bold', 'italic', 'underline', 'bg']
     for t in types:
         cato = str(Color(t).red().bold())
@@ -144,3 +144,7 @@ if __name__ == '__main__':
 
             c = str(Color(color).green())
             print(f'\t{c:<30} : {text}')
+
+
+if __name__ == '__main__':
+    main()

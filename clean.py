@@ -1,10 +1,15 @@
-from src.fs import clean_directory
-from src.color import Color
-
+from pathlib import Path
+from pkgs.fs.zyjared.fs import clean_directory
+from pkgs.color.zyjared.color import Color
 
 if __name__ == '__main__':
-    dirpath = "."
-    include = [r'.*tempCodeRunnerFile\.py', r'.*__pycache__']
+    dirpath = Path(__file__).parent
+    include = [
+        r'.*tempCodeRunnerFile\.py',
+        r'.*__pycache__',
+        r'.*egg-info',
+        r'.*build'
+        ]
     ignore = [r'\.git', r'env',]
 
     removed = clean_directory(dirpath, include, ignore)
