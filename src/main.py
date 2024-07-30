@@ -1,7 +1,16 @@
-from zyjared.color import Color
-from zyjared.fs import clean_directory
+seq = bytearray(5)
+seq[0] = 1
+seq[2] = 31
 
-print(f'{Color("Hello World!").red().bold()}')
+ba = bytearray(b'\033[')
+ba.extend(b';'.join(str(code).encode() for code in seq if code))
+ba.extend(b'm')
 
-removed = clean_directory('.', ['.*tempCodeRunnerFile.py'], ['.*__pycache__'])
-print(removed)
+ba.extend(b'hello world')
+
+ba.extend(b'\033[0m')
+
+print(ba.decode('utf-8'))
+
+
+print(bytes('3asdf'))

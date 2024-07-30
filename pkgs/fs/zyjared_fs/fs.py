@@ -1,12 +1,3 @@
-"""
-文件相关工具
-
-Author: Jared Zhang
-Email: zyjared@outlook.com
-
-Github: https://github.com/zyjared/kit-python
-"""
-
 from typing import Pattern
 from pathlib import Path
 import re
@@ -27,23 +18,24 @@ def matches_path(path: Path, match: list[Pattern]):
     return False
 
 
-def rm_path(path: Path):
+def rm_path(filepath: Path | str):
     """
     删除文件或目录
     """
     try:
-        if path.is_dir():
-            for child in path.iterdir():
+        p = Path(filepath)
+        if p.is_dir():
+            for child in p.iterdir():
                 rm_path(child)
-            path.rmdir()
+            p.rmdir()
         else:
-            path.unlink()
+            p.unlink()
     except PermissionError:
-        print(f'[rm_path] Permission denied: {path}')
+        print(f'[rm_path] Permission denied: {p}')
     except FileNotFoundError:
-        print(f'[rm_path] File not found: {path}')
+        print(f'[rm_path] File not found: {p}')
     except Exception as e:
-        print(f'[rm_path] Error {path}: {e}')
+        print(f'[rm_path] Error {p}: {e}')
 
 
 def clean_directory_recursive(dirpath: Path, include: list[Pattern], ignore: list[Pattern] = None, removed: list[Path] = [], root: Path = None):
@@ -91,20 +83,3 @@ def clean_directory(dirpath: str | Path, include: list[str], ignore: list[str] =
         [],
         root=dirpath
     )
-
-
-if __name__ == '__main__':
-    import sys
-
-    if (len(sys.argv) < 3):
-        print('Usage: python clean.py <dirpath> <include> [ignore]')
-        exit(1)
-
-    dirpath = sys.argv[1]
-    include = sys.argv[2].split(',')
-    ignore = sys.argv[3].split(',') if len(sys.argv) > 3 else None
-
-    removed = clean_directory(dirpath, include, ignore)
-
-    for path in removed:
-        print(f'Removed: {path}')
