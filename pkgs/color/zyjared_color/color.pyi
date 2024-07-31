@@ -4,12 +4,23 @@ from .style import Style
 
 class ColorMeta(type):
     def __new__(cls: Type[Self], name: str, bases: tuple, dct: dict) -> Type[Self]: ...
+
     @staticmethod
     def _setup(cls: ColorMeta) -> None: ...
     @staticmethod
     def _gen_method(attr: str) -> Callable[[str], Style]: ...
 
+
 class Color:
+    def __new__(cls: Type[Self], text: str) -> Style: ...
+
+    @staticmethod
+    def extend(style: Style) -> Style: ...
+    @staticmethod
+    def clean(style: Style) -> Style: ...
+
+    # styles
+
     @staticmethod
     def bold(text: str) -> Style: ...
     @staticmethod

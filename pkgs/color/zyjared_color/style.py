@@ -19,7 +19,8 @@ class StyleMeta(type):
         for color in COLORS.keys():
             setattr(cls, color, StyleMeta._gen_color_method(COLORS[color], 0))
         for color in COLORS_BG.keys():
-            setattr(cls, color, StyleMeta._gen_color_method(COLORS_BG[color], 1))
+            setattr(cls, color, StyleMeta._gen_color_method(
+                COLORS_BG[color], 1))
 
     @staticmethod
     def _gen_style_method(code: int, index: int):
@@ -30,7 +31,7 @@ class StyleMeta(type):
         return wrapper
 
     @staticmethod
-    def _gen_color_method(code: int,index: Literal[0, 1]):
+    def _gen_color_method(code: int, index: Literal[0, 1]):
         def wrapper(self):
             self._seq[index] = code
             return self
@@ -39,22 +40,40 @@ class StyleMeta(type):
 
 class Style(metaclass=StyleMeta):
 
-    def __init__(self, text: str):
+    def __init__(self, text: str | None = None):
         # Order and length: see .constant.STYLES
         self._seq = bytearray(STYLES_LENGTH)
-        self.text = None
+        self.text = text
         if isinstance(text, Style):
             self.extend(text)
-        else:
-            self.text = text
 
-    def extend(self, src: Self):
+    def set_text(self, text: str):
+        """
+        Set the text of the style.
+
+        Recommanded when resetting the text.
+        """
+        self.text = text
+        return self
+
+    def extend(self, src: Type[Self]):
+        """
+        Extend the style with another style.
+
+        If `self.text` is None, text will be set to `src.text`.
+        """
+        if self.text is None and src.text is not None:
+            self.text = src.text
+
         for i in range(STYLES_LENGTH):
             if src._seq[i]:
                 self._seq[i] = src._seq[i]
         return self
 
     def clean(self):
+        """
+        Clean the style, but not the text.
+        """
         self._seq = bytearray(STYLES_LENGTH)
         return self
 
@@ -122,3 +141,16 @@ class Style(metaclass=StyleMeta):
             return ba.decode()
         else:
             return f'{other}{self.to_str()}'
+
+    def __repr__(self):
+        dic = {}
+        dic['text'] = self.text
+        if self._seq[0]:
+            dic['fg'] = self._seq[0]
+        if self._seq[1]:
+            dic['bg'] = self._seq[1]
+        for i in range(2, STYLES_LENGTH):
+            (style, code) = STYLES[i]
+            if self._seq[i]:
+                dic[style] = code
+        return f'{Style('Style').green().bold().italic()}: {dic}'

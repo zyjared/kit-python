@@ -5,20 +5,10 @@ from pkgs.color.zyjared_color.color import Color
 
 if __name__ == '__main__':
 
-    a = Color.red('Hello World!')
-    print(a)
+    a = Color.red('Hello World!').bold()
+    print(repr(a))
 
-    b = Color.bold('Hello World!').italic().underline().bg_blue()
-    print(b)
-
-    c = Color.red('Hello') + ' ' + Color.blue('World') + '!!!'
-    print(c)
-
-    d = Color('extend styles').extend(a)
-    print(d)
-
-    e = b.clean().red()
-    print(e)
+    print(Color(a).italic())
 
     types = ['bold', 'italic', 'underline', 'bg', 'dim',
              'blink', 'blink_fast', 'hidden', 'reverse']

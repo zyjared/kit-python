@@ -18,7 +18,8 @@ class ColorMeta(type):
             *[k for k in COLORS.keys()],
             *[k for k in COLORS_BG.keys()]
         ]:
-            setattr(cls, attr, staticmethod(partial(ColorMeta._gen_method(attr))))
+            setattr(cls, attr, staticmethod(
+                partial(ColorMeta._gen_method(attr))))
 
     @staticmethod
     def _gen_method(attr: str):
@@ -30,3 +31,25 @@ class ColorMeta(type):
 class Color(metaclass=ColorMeta):
     def __new__(cls: Type[Self], text: str) -> Style:
         return Style(text)
+
+    @staticmethod
+    def extend(style: Style) -> Style:
+        """
+        Extend the style with another style.
+
+        If `self.text` is None, text will be set to `src.text`.
+
+        Return:
+            A new style
+        """
+        return Style().extend(style)
+
+    @staticmethod
+    def clean(style: Style) -> Style:
+        """
+        Clean the instance's style.
+
+        Return:
+            A new style
+        """
+        return style.clean()
