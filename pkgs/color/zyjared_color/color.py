@@ -14,7 +14,7 @@ class ColorMeta(type):
     @staticmethod
     def _setup(cls):
         for attr in [
-            *[i[0] for i in STYLES],
+            *[i[0] for i in STYLES[2:]],
             *[k for k in COLORS.keys()],
             *[k for k in COLORS_BG.keys()]
         ]:
