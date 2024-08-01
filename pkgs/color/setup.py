@@ -3,7 +3,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='zyjared-color',
-    version='0.1.6',
+    version='0.2.0',
     packages=find_namespace_packages(include=['zyjared_color', 'zyjared_color.*']),
     install_requires=[],
     author='Jared Zhang',
@@ -17,5 +17,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
 )

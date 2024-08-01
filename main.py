@@ -1,29 +1,36 @@
 from pathlib import Path
-# from pkgs.color.zyjared_color.constant import COLORS
+from pkgs.color.zyjared_color.core.constant import _COLORS
 from pkgs.fs.zyjared_fs import clean_directory
-from pkgs.color.zyjared_color.color import Color
+from pkgs.color.zyjared_color import Color
+from time import time
 
-if __name__ == '__main__':
 
-    a = Color.red('Hello World!').bold()
-    print(repr(a))
+def funcname(func, name):
+    if func.__name__ == '<lambda>':
+        return name
 
-    print(Color(a).italic())
+    return func.__name__
+
+
+def test_color():
 
     types = ['bold', 'italic', 'underline', 'bg', 'dim',
              'blink', 'blink_fast', 'hidden', 'reverse']
-    # for t in types:
-    #     cato = Style(t).red().bold()
-    #     print(f'{cato:<20}')
-    #     for color in COLORS:
-    #         text = getattr(Style('Hello World!'), color)()
-    #         if t == 'bg':
-    #             text = getattr(text, f'bg_{color}')()
-    #         else:
-    #             text = getattr(text, t)()
+    for t in types:
+        cato = Color(t).red().bold()
+        print(f'{cato:<20}')
+        for color in _COLORS:
+            text = getattr(Color('Hello World!'), color)()
+            if t == 'bg':
+                text = getattr(text, f'bg_{color}')()
+            else:
+                text = getattr(text, t)()
 
-    #         c = str(Style(color).green())
-    #         print(f'\t{c:<30} : {text}')
+            c = str(Color(color).green())
+            print(f'\t{c:<30} : {text}')
+
+
+def test_clean():
     files = ['1.py', '2.py']
 
     if not Path('test').exists():
@@ -34,7 +41,6 @@ if __name__ == '__main__':
         filepath.touch()
         print(f'Created {Color.green(filepath)}')
 
-    # clean
     dirpath = Path(__file__).parent
     include = [
         r'.*tempCodeRunnerFile\.py',
@@ -62,3 +68,92 @@ if __name__ == '__main__':
         prefix = Color.magenta("removed") + right
         for path in removed:
             print(f'    {prefix}{path}')
+
+
+def test_bytes(count):
+    style = bytearray([31, 32, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    ba = bytearray()
+    for i in range(count):
+        ba.extend(style)
+        ba.extend('Hello World!'.encode())
+
+    res = ba.decode()
+    return res
+
+
+def test_str(count):
+    style = {
+        'fg': 31,
+        'bg': 32,
+        'bold': 1,
+        'dim': 2,
+        'italic': 3,
+        'underline': 4,
+        'blink': 5,
+        'blink_fast': 6,
+        'reverse': 7,
+        'hidden': 8,
+    }
+    s = ''
+    for i in range(count):
+        vs = [f'{v}' for v in style.values()]
+        vs.append('Hello World!')
+        s = ''.join(vs)
+
+    res = s
+    return res
+
+
+def perfomance_test(func1, func2, count=100):
+    dic = {}
+
+    time_start = time()
+
+    for i in range(count):
+        func1()
+
+    time_end = time()
+
+    dic[funcname(func1, 'func1')] = time_end - time_start
+
+    time_start = time()
+
+    for i in range(count):
+        func2()
+
+    time_end = time()
+
+    dic[funcname(func2, 'func2')] = time_end - time_start
+
+    return dic
+
+
+def test_perfomance():
+    for i in range(100):
+        res = perfomance_test(
+            lambda: test_str(1),
+            lambda: test_bytes(2),
+            1000
+        )
+
+        fun1_msg = Color(f'{round(res['func1'] * 1000, 3)}ms')
+        fun2_msg = Color(f'{round(res['func2'] * 1000, 3)}ms')
+
+        if res['func1'] > res['func2']:
+            fun1_msg.red()
+            fun2_msg.green()
+        elif res['func1'] < res['func2']:
+            fun1_msg.green()
+            fun2_msg.red()
+        else:
+            fun1_msg.cyan()
+            fun2_msg.cyan()
+
+        print(f'{i:>3} -> str: {fun1_msg:>20} | bytes: {fun2_msg:>20}')
+
+
+if __name__ == '__main__':
+    test_color()
+    # test_clean()
+    # test_perfomance()
+    # print(Color.red('Hello World!'))

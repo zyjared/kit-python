@@ -12,89 +12,123 @@ pip install zyjared-color
 
 ## Usage
 
+### Basic Usage
+
+Create a styled text using the `Color` class:
+
 ```python
-from zyjared_color import Color
-
-a = Color.red('Hello World!')
-print(a)
-
-b = Color.bold('Hello World!').italic().underline().bg_blue()
-print(b)
-
-c = Color.red('Hello') + ' ' + Color.blue('World') + '!!!'
-print(c)
-
-d = Color('extend styles').extend(a)
-print(d)
-
-e = b.clean().red()
-print(e)
-
-f = Color.extend(e)
+text = Color('Hello World!').red().bold()
+print(text)
 ```
 
-## Color
+You can achieve the same result using `ColorStatic` class methods:
 
-The `Color` class provides static methods that return instances of the `Style` class.
+```python
+from zyjared_color import ColorStatic as Colors
 
-### `Style` class
+text = Colors.red('Hello World!').bold()
+print(text)
+```
 
-The static methods of the `Color` class are designed to create and return instances of the `Style` class. Each method in the `Color` class returns a `Style` instance, which can then be used for further manipulation.
+Or using convenience functions for styles:
 
-- `Color( text: str ) -> Instance[Style]`
-- `Style( text: str | None = ... ) -> Instance[Style]`
+```python
+from zyjared_color import red, bold, italic
+
+text = red('Hello World!').bold()
+print(text)
+
+text = italic(text)
+print(text)
+```
+
+### Chaining Usage
+
+You can chain multiple style methods together:
+
+```python
+from zyjared_color import red
+
+text = red('Hello World!').bold().italic().underline().through()
+print(text)
+```
+
+### Nested Usage
+
+Combine different styling methods and functions:
+
+```python
+from zyjared_color import red, bold, italic, underline, through, blue
+
+text = through(underline(italic(bold(red('Hello World!')))))
+print(text)
+
+# add more text
+text = text + ' !!! ' + blue('Hello World!')
+print(text)
+
+# change text color
+text.yellow()
+print(text)
+```
+
+## All Styles
+
+You can view all styles through the `ColorStatic` class method.
 
 ### methods
 
-- `Color.extend( style: Style )`
-- `Color.clean( style: Style )`
+- `extend(style)`
+- `clean(style)`
 
 ### styles
 
-- `Color.bold( text: str )`
-- `Color.italic( text: str )`
-- `Color.underline( text: str )`
-- `Color.dim( text: str )`
-- `Color.through( text: str )`
-- `Color.reverse( text: str )`
-- `Color.blink( text: str )`
-- `Color.blink_fast( text: str )`
-- `Color.hidden( text: str )`
+- `bold`
+- `dim`
+- `italic`
+- `underline`
+- `through`
+- `reverse`
+- `blink`
+- `blink_fast`
+- `hidden`
 
-### foreground
+### fg
 
-- `Color.black( text: str )`
-- `Color.red( text: str )`
-- `Color.green( text: str )`
-- `Color.yellow( text: str )`
-- `Color.blue( text: str )`
-- `Color.magenta( text: str )`
-- `Color.cyan( text: str )`
-- `Color.white( text: str )`
-- `Color.bright_black( text: str )`
-- `Color.bright_red( text: str )`
-- `Color.bright_green( text: str )`
-- `Color.bright_yellow( text: str )`
-- `Color.bright_blue( text: str )`
-- `Color.bright_magenta( text: str )`
-- `Color.bright_cyan( text: str )`
-- `Color.bright_white( text: str )`
+- `black`
+- `red`
+- `green`
+- `yellow`
+- `blue`
+- `magenta`
+- `cyan`
+- `white`
+- `bright_black`
+- `bright_red`
+- `bright_green`
+- `bright_yellow`
+- `bright_blue`
+- `bright_magenta`
+- `bright_cyan`
+- `bright_white`
 
-### background
+### bg
 
-- `Color.bg_black( text: str )`
-- `Color.bg_red( text: str )`
-- `Color.bg_green( text: str )`
-- `Color.bg_yellow( text: str )`
-- `Color.bg_blue( text: str )`
-- `Color.bg_magenta( text: str )`
-- `Color.bg_cyan( text: str )`
-- `Color.bg_white( text: str )`
-- `Color.bg_bright_black( text: str )`
-- `Color.bg_bright_red( text: str )`
-- `Color.bg_bright_green( text: str )`
-- `Color.bg_bright_yellow( text: str )`
-- `Color.bg_bright_blue( text: str )`
-- `Color.bg_bright_magenta( text: str )`
-- `Color.bg_bright_cyan( text: str )`
-- `Color.bg_bright_white( text: str )`
+- `bg_black`
+- `bg_red`
+- `bg_green`
+- `bg_yellow`
+- `bg_blue`
+- `bg_magenta`
+- `bg_cyan`
+- `bg_white`
+- `bg_bright_black`
+- `bg_bright_red`
+- `bg_bright_green`
+- `bg_bright_yellow`
+- `bg_bright_blue`
+- `bg_bright_magenta`
+- `bg_bright_cyan`
+- `bg_bright_white`
+
+

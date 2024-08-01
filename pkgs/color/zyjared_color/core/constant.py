@@ -1,8 +1,8 @@
-from typing import Final
+from typing import Final, Tuple, List
 
-PKG_NAME: Final = 'zyjared-color'
+_PKG_NAME: Final = 'zyjared-color'
 
-COLORS: Final = {
+_COLORS: Final = {
     'black': 30,
     'red': 31,
     'green': 32,
@@ -21,7 +21,7 @@ COLORS: Final = {
     'bright_white': 97,
 }
 
-COLORS_BG: Final = {
+_COLORS_BG: Final = {
     'bg_black': 40,
     'bg_red': 41,
     'bg_green': 42,
@@ -41,7 +41,7 @@ COLORS_BG: Final = {
 }
 
 
-STYLES: Final = [
+_STYLES: List[Tuple[str, int | None]] = [
     ('fg', None),
     ('bg', None),
     ('bold', 1),
@@ -55,4 +55,10 @@ STYLES: Final = [
     ('hidden', 8)
 ]
 
-STYLES_LENGTH: Final = len(STYLES)
+_STYLES_LENGTH: Final = len(_STYLES)
+
+_EXPORT_STYLES: Tuple[str] = (
+    *_COLORS.keys(),
+    *_COLORS_BG.keys(),
+    *[s for (s, _) in _STYLES[2:]]
+)
