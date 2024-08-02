@@ -1,7 +1,7 @@
 from typing import Self, Type, TypeVar
 from functools import partial
 from .color import Color, ColorAbyss
-from .constant import _EXPORT_STYLES
+from .core.constant import _EXPORT_STYLES
 
 
 __all__ = [

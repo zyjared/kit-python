@@ -1,5 +1,5 @@
-from .core.color import Color
-from .core.static import ColorStatic
+from .color import Color
+from .static import ColorStatic
 
 # Aliases
 

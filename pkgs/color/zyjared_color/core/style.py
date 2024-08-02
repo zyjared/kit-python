@@ -1,6 +1,6 @@
 from typing import Self, Type,  Optional, TypeVar, Union, overload
 from .constant import _COLORS, _COLORS_BG, _STYLES, _STYLES_LENGTH
-from .types.method import ColorMethod
+from ..types.method import ColorMethod
 
 
 __all__ = [

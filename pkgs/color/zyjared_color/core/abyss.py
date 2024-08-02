@@ -1,5 +1,5 @@
 from typing import Self, Type, TypeVar, Tuple
-from .types.method import ColorMethod
+from ..types.method import ColorMethod
 from .constant import _EXPORT_STYLES
 from .style import Style
 

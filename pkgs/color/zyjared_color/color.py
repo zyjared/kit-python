@@ -1,7 +1,7 @@
 from typing import Type, Self, TypeVar, overload, Optional, Union
-from .constant import _STYLES_LENGTH
-from .style import Style
-from .abyss import ColorAbyss
+from .core.constant import _STYLES_LENGTH
+from .core.style import Style
+from .core.abyss import ColorAbyss
 
 __all__ = [
     'Color',

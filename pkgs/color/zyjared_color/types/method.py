@@ -1,5 +1,8 @@
 from typing import Self
 
+__all__ = [
+    'ColorMethod'
+]
 
 class ColorMethod:
 
