@@ -93,7 +93,7 @@ You can view all styles through the `ColorStatic` class method.
 - `blink_fast`
 - `hidden`
 
-### fg
+### frontground
 
 - `black`
 - `red`
@@ -112,7 +112,7 @@ You can view all styles through the `ColorStatic` class method.
 - `bright_cyan`
 - `bright_white`
 
-### bg
+### background
 
 - `bg_black`
 - `bg_red`
