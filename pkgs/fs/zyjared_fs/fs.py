@@ -2,6 +2,12 @@ from typing import Pattern
 from pathlib import Path
 import re
 
+__all__ = [
+    'matches_path',
+    'rm_path',
+    'clean_directory',
+]
+
 
 def matches_path(path: Path, match: list[Pattern]):
     """

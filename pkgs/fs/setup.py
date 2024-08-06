@@ -1,6 +1,9 @@
 import os
 from setuptools import setup, find_namespace_packages
 
+_PY_VERSION = '3.11'
+
+
 setup(
     name='zyjared-fs',
     version='0.1.1',
@@ -9,13 +12,14 @@ setup(
     author='Jared Zhang',
     author_email='zyjared@outlook.com',
     description='simple tools for file or path',
-    long_description=open('README.md').read() if os.path.exists('README.md') else '',
+    long_description=open('README.md').read(
+    ) if os.path.exists('README.md') else '',
     long_description_content_type='text/markdown',
     url='https://github.com/zyjared/kit-python',
     classifiers=[
-        'Programming Language :: Python :: 3.6',
+        f'Programming Language :: Python :: {_PY_VERSION}',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
     ],
-    python_requires='>=3.6',
+    python_requires=f'>={_PY_VERSION}',
 )
